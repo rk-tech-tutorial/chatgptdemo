@@ -1,0 +1,3 @@
+backend/.env
+backend/node_modules
+chat-gpt-ui/node_modules
