@@ -1,6 +1,7 @@
 ### Chat GPT Demo using reactjs and nodejs as backend
 
-[![Alt text for the video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=aJkFRv571_Q)
+[![ChatGPT Demo](https://img.youtube.com/vi/aJkFRv571_Q/0.jpg)](https://www.youtube.com/watch?v=aJkFRv571_Q)
+
 
 ## How to run
 1. Clone the repo
