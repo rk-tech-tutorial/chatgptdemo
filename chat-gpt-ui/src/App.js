@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
   const [inputValue, setInputValue] = React.useState('')
+  const [promptData, setPromptData] = React.useState('')
   const [imagePrompt, setImagePrompt] = React.useState("")
   const [state, setState] = React.useState({
     express: null
@@ -13,17 +14,35 @@ function App() {
     express: null
   });
 
+  const prompt = [
+    "physics teacher",
+    "maths teacher",
+    "chemistry teacher",
+    "biology teacher",
+    "linux terminal",
+    "windows terminal",
+    "mac terminal",
+    "linux commands",
+    "windows commands",
+    "mac commands",
+    "tata 4 wheeler sales executive",
+    "You are javascript programmer"
+  ]
 
   const setValue = (e) => {
     e.preventDefault();
     setInputValue(e.target.value)
   };
+  const setPromptValue = (e) => {
+    e.preventDefault();
+    setPromptData(e.target.value)
+  }
 
   const callExpress = (e) => {
     e.preventDefault();
     console.log("callExpress", inputValue)
     axios
-      .post('http://localhost:3001/api/createCompletion', { message: inputValue })
+      .post('http://localhost:3001/api/createCompletion', { message: inputValue, chooseOptions: promptData })
       .then(res => setState({ express: res.data.express }))
       .catch(err => console.log(err));
   }
@@ -49,20 +68,37 @@ function App() {
       <header className="App-header">
         {/* create text input with form data and one submit button */}
         <form id='form1'>
+          {/* Generate a choose option in which user can send */}
           <label>
-            Add Your Name:
-            <input type="text" value={inputValue} id="name" onChange={setValue} />
+           Choose Profession: &nbsp;
+          <select name="chooseOptions" id="chooseOptions" onChange={setPromptValue}>
+            {
+              prompt.map((item, index) => <option key={index} value={item}>{item.toUpperCase()}</option>)
+            }
+          </select>
           </label>
+          <br />
+
+          <label>
+            Ask Question: &nbsp;
+            <input type="text" value={inputValue} id="name" onChange={setValue}  placeholder='Write question here'/>
+          </label>
+          &nbsp;
           <input type="submit" value="Submit" onClick={callExpress} />
         </form>
+        <p>{state.express}</p>
 
-        <form id='form2'>
+        <br />
+        <br />
+        <br />
+
+        {/* <form id='form2'>
           <label>
-            Add Your Image Prompt:
+            Add Your Image Prompt get your images:
             <input type="text" value={imagePrompt} id="name" onChange={setPrompt} />
           </label>
           <input type="submit" value="Submit" onClick={callExpressImage} />
-        </form>
+        </form> */}
 
         {/* Iterate Over response and print in a p tag of stateImg hook value with image tag inside p tag */}
         {
@@ -71,7 +107,6 @@ function App() {
           })
         }
 
-        <p>{state.express}</p>
       </header>
     </div>
   );
